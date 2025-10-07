@@ -29,35 +29,6 @@
             backdrop-filter: blur(10px);
         }
 
-        .header-top {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
-            padding: 0.8rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            font-size: 0.85rem;
-            gap: 1rem;
-        }
-
-        .header-info {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .header-info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #fff;
-            transition: transform 0.3s;
-        }
-
-        .header-info-item:hover {
-            transform: translateY(-2px);
-        }
-
         .header-main {
             padding: 1rem 5%;
             display: flex;
@@ -334,6 +305,10 @@
             padding: 3rem 5%;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .content-section {
+            display: block;
         }
 
         .section-header {
@@ -930,6 +905,50 @@
             display: flex;
         }
 
+        /* Add error styling for form validation */
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Loading state for buttons */
+        .btn-loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero-content h2 {
@@ -942,7 +961,6 @@
         }
 
         @media (max-width: 900px) {
-            /* Show hamburger menu on medium screens */
             .mobile-menu-btn {
                 display: block;
             }
@@ -986,20 +1004,17 @@
                 box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
             }
 
-            /* Show navigation icons on mobile */
             .nav-icon {
                 display: inline;
                 font-size: 1.5rem;
             }
 
-            /* Show text on mobile in centered menu */
             .nav-text {
                 display: inline;
                 font-size: 1.1rem;
                 font-weight: 600;
             }
 
-            /* Close button for mobile menu */
             .mobile-menu-close {
                 position: absolute;
                 top: 2rem;
@@ -1092,30 +1107,11 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
-            /* Mobile header info */
-            .header-info {
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            .header-info-item span:first-child {
-                font-size: 1.2rem;
-            }
-
-            .header-info-item span:last-child {
-                font-size: 0.8rem;
-            }
         }
 
         @media (max-width: 480px) {
-            .header-top {
-                padding: 0.6rem 3%;
-                font-size: 0.75rem;
-            }
-
-            .header-info {
-                gap: 0.5rem;
+            .header-main {
+                padding: 0.8rem 3%;
             }
 
             .hero-content h2 {
@@ -1143,22 +1139,6 @@
                 font-size: 1.5rem;
             }
 
-            /* Mobile header adjustments */
-            .header-info-item {
-                flex-direction: column;
-                gap: 0.2rem;
-                text-align: center;
-            }
-
-            .header-info-item span:first-child {
-                font-size: 1.5rem;
-            }
-
-            .header-info-item span:last-child {
-                font-size: 0.7rem;
-            }
-
-            /* Mobile menu adjustments */
             nav a {
                 width: 90%;
                 padding: 1.2rem 1.5rem;
@@ -1169,43 +1149,10 @@
                 font-size: 1.3rem;
             }
         }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <div class="header-info">
-                <div class="header-info-item">
-                    <span>📧</span>
-                    <span>sports@muitnoida.edu.in</span>
-                </div>
-                <div class="header-info-item">
-                    <span>📞</span>
-                    <span>+91-120-2585000</span>
-                </div>
-            </div>
-            <div class="header-info">
-                <div class="header-info-item">
-                    <span>📍</span>
-                    <span>MUIT Campus, Noida, UP</span>
-                </div>
-            </div>
-        </div>
         <div class="header-main">
             <div class="logo-section">
                 <div class="logo">
@@ -1539,42 +1486,6 @@
                     <button class="view-btn" onclick="showResults('Lawn Tennis')">View Results</button>
                 </div>
 
-                <div class="sport-card" data-category="individual" data-sport="Swimming">
-                    <div class="sport-icon">🏊</div>
-                    <h3>Swimming</h3>
-                    <p>Various swimming events and competitions</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">36</div>
-                            <div class="stat-label">Swimmers</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">12</div>
-                            <div class="stat-label">Events</div>
-                        </div>
-                    </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Swimming')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Swimming')">View Results</button>
-                </div>
-
-                <div class="sport-card" data-category="individual" data-sport="Boxing">
-                    <div class="sport-icon">🥊</div>
-                    <h3>Boxing</h3>
-                    <p>Amateur boxing championship in various weight categories</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">24</div>
-                            <div class="stat-label">Boxers</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">8</div>
-                            <div class="stat-label">Categories</div>
-                        </div>
-                    </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Boxing')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Boxing')">View Results</button>
-                </div>
-
                 <!-- Indoor Games -->
                 <div class="sport-card" data-category="indoor" data-sport="Table Tennis">
                     <div class="sport-icon">🏓</div>
@@ -1629,24 +1540,6 @@
                     <button class="register-btn" onclick="openRegistrationModal('Chess')">Register Now</button>
                     <button class="view-btn" onclick="showResults('Chess')">View Results</button>
                 </div>
-
-                <div class="sport-card" data-category="indoor" data-sport="Snooker">
-                    <div class="sport-icon">🎱</div>
-                    <h3>Snooker</h3>
-                    <p>Cue sports tournament with professional rules</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">32</div>
-                            <div class="stat-label">Players</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">16</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
-                    </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Snooker')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Snooker')">View Results</button>
-                </div>
             </div>
         </div>
 
@@ -1666,10 +1559,12 @@
                     <div class="form-group">
                         <label for="fullname">Full Name *</label>
                         <input type="text" id="fullname" required placeholder="Enter your full name">
+                        <div class="error-message"></div>
                     </div>
                     <div class="form-group">
                         <label for="enrollment">Enrollment Number *</label>
                         <input type="text" id="enrollment" required placeholder="Enter enrollment number">
+                        <div class="error-message"></div>
                     </div>
                 </div>
 
@@ -1677,10 +1572,12 @@
                     <div class="form-group">
                         <label for="email">Email Address *</label>
                         <input type="email" id="email" required placeholder="your.email@muitnoida.edu.in">
+                        <div class="error-message"></div>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
                         <input type="tel" id="phone" required placeholder="+91-XXXXXXXXXX">
+                        <div class="error-message"></div>
                     </div>
                 </div>
 
@@ -1697,6 +1594,7 @@
                             <option value="BBA">Business Administration</option>
                             <option value="MBA">Master of Business Administration</option>
                         </select>
+                        <div class="error-message"></div>
                     </div>
                     <div class="form-group">
                         <label for="year">Year *</label>
@@ -1707,6 +1605,7 @@
                             <option value="3">3rd Year</option>
                             <option value="4">4th Year</option>
                         </select>
+                        <div class="error-message"></div>
                     </div>
                 </div>
 
@@ -1727,13 +1626,11 @@
                         <option value="High Jump">High Jump</option>
                         <option value="Badminton">Badminton</option>
                         <option value="Lawn Tennis">Lawn Tennis</option>
-                        <option value="Swimming">Swimming</option>
-                        <option value="Boxing">Boxing</option>
                         <option value="Table Tennis">Table Tennis</option>
                         <option value="Carrom">Carrom</option>
                         <option value="Chess">Chess</option>
-                        <option value="Snooker">Snooker</option>
                     </select>
+                    <div class="error-message"></div>
                 </div>
 
                 <div class="form-group">
@@ -1743,11 +1640,13 @@
                         <option value="Individual">Individual</option>
                         <option value="Team">Team (Enter team name below)</option>
                     </select>
+                    <div class="error-message"></div>
                 </div>
 
                 <div class="form-group" id="team-name-group" style="display: none;">
                     <label for="teamname">Team Name</label>
                     <input type="text" id="teamname" placeholder="Enter your team name">
+                    <div class="error-message"></div>
                 </div>
 
                 <div class="form-group">
@@ -1962,45 +1861,128 @@
             }
         });
 
+        // Form validation function
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = document.querySelectorAll('input[required], select[required]');
+            
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+            document.querySelectorAll('.error-message').forEach(msg => msg.classList.remove('show'));
+            
+            // Check each required field
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    const errorMsg = field.parentNode.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.textContent = 'This field is required';
+                        errorMsg.classList.add('show');
+                    }
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const emailField = document.getElementById('email');
+            if (emailField.value && !isValidEmail(emailField.value)) {
+                emailField.classList.add('error');
+                const errorMsg = emailField.parentNode.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.textContent = 'Please enter a valid email address';
+                    errorMsg.classList.add('show');
+                }
+                isValid = false;
+            }
+            
+            // Validate phone number
+            const phoneField = document.getElementById('phone');
+            if (phoneField.value && !isValidPhone(phoneField.value)) {
+                phoneField.classList.add('error');
+                const errorMsg = phoneField.parentNode.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.textContent = 'Please enter a valid phone number';
+                    errorMsg.classList.add('show');
+                }
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+            return phoneRegex.test(phone.replace(/\s/g, ''));
+        }
+
         // Registration form submission
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = {
-                id: 'MUIT-' + Date.now(),
-                fullname: document.getElementById('fullname').value,
-                enrollment: document.getElementById('enrollment').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                department: document.getElementById('department').value,
-                year: document.getElementById('year').value,
-                sport: document.getElementById('sport').value,
-                category: document.getElementById('category').value,
-                teamname: document.getElementById('teamname').value,
-                experience: document.getElementById('experience').value,
-                comments: document.getElementById('comments').value,
-                date: new Date().toLocaleDateString()
-            };
+            // Validate form
+            if (!validateForm()) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
             
-            registrations.push(formData);
-            totalRegistrations++;
-            document.getElementById('total-registrations').textContent = totalRegistrations.toLocaleString();
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.classList.add('btn-loading');
+            submitBtn.disabled = true;
             
-            // Show success message
-            document.getElementById('reg-id').textContent = formData.id;
-            document.getElementById('success-message').classList.add('show');
-            
-            // Reset form
-            this.reset();
-            document.getElementById('team-name-group').style.display = 'none';
-            
-            // Hide success message after 7 seconds
+            // Simulate API call delay
             setTimeout(() => {
-                document.getElementById('success-message').classList.remove('show');
-            }, 7000);
-            
-            // Scroll to success message
-            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const formData = {
+                    id: 'MUIT-' + Date.now(),
+                    fullname: document.getElementById('fullname').value,
+                    enrollment: document.getElementById('enrollment').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    department: document.getElementById('department').value,
+                    year: document.getElementById('year').value,
+                    sport: document.getElementById('sport').value,
+                    category: document.getElementById('category').value,
+                    teamname: document.getElementById('teamname').value,
+                    experience: document.getElementById('experience').value,
+                    comments: document.getElementById('comments').value,
+                    date: new Date().toLocaleDateString()
+                };
+                
+                registrations.push(formData);
+                totalRegistrations++;
+                document.getElementById('total-registrations').textContent = totalRegistrations.toLocaleString();
+                
+                // Show success message
+                document.getElementById('reg-id').textContent = formData.id;
+                document.getElementById('success-message').classList.add('show');
+                
+                // Reset form
+                this.reset();
+                document.getElementById('team-name-group').style.display = 'none';
+                
+                // Reset button state
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 7 seconds
+                setTimeout(() => {
+                    document.getElementById('success-message').classList.remove('show');
+                }, 7000);
+                
+                // Scroll to success message
+                document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
         });
 
         // Results data for all sports
@@ -2184,19 +2166,6 @@
         window.addEventListener('load', function() {
             document.querySelectorAll('.info-card, .sport-card').forEach(card => {
                 observer.observe(card);
-            });
-        });
-
-        // Form validation enhancement
-        const inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
-        inputs.forEach(input => {
-            input.addEventListener('invalid', function(e) {
-                e.preventDefault();
-                this.classList.add('error');
-            });
-            
-            input.addEventListener('input', function() {
-                this.classList.remove('error');
             });
         });
 
