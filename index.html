@@ -4,29 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MUIT Sportys - Sports League Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #FFD700;
+            --accent: #228B22;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --gray: #7f8c8d;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            --gradient-secondary: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --gradient-accent: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
             background-attachment: fixed;
-            color: #333;
+            color: var(--dark);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header */
         header {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--secondary);
         }
 
         .header-main {
@@ -55,10 +72,10 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);
-            transition: transform 0.3s;
+            transition: var(--transition);
             overflow: hidden;
             padding: 5px;
-            border: 3px solid #FFD700;
+            border: 3px solid var(--secondary);
             flex-shrink: 0;
         }
 
@@ -79,7 +96,7 @@
 
         .logo-text h1 {
             font-size: 1.8rem;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -92,7 +109,7 @@
 
         .logo-text p {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: var(--gray);
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
@@ -114,14 +131,14 @@
 
         .mobile-menu-btn {
             display: none;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             color: white;
             border: none;
             padding: 0.7rem 1rem;
             border-radius: 8px;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: var(--transition);
             flex-shrink: 0;
             z-index: 1002;
         }
@@ -132,12 +149,12 @@
 
         nav a {
             text-decoration: none;
-            color: #2c3e50;
+            color: var(--dark);
             font-weight: 600;
             font-size: 0.95rem;
             padding: 0.7rem 1.3rem;
             border-radius: 8px;
-            transition: all 0.3s;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
             white-space: nowrap;
@@ -153,8 +170,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
-            transition: left 0.3s;
+            background: var(--gradient-primary);
+            transition: var(--transition);
             z-index: -1;
         }
 
@@ -168,15 +185,9 @@
         }
 
         nav a.active {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             color: #fff;
             box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
-        }
-
-        /* Mobile Navigation Icons */
-        .nav-icon {
-            display: none;
-            font-size: 1.2rem;
         }
 
         /* Breadcrumb */
@@ -192,7 +203,7 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: var(--gray);
             flex-wrap: wrap;
         }
 
@@ -284,13 +295,13 @@
             font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .cta-btn-primary {
-            background: #FFD700;
-            color: #8B0000;
+            background: var(--secondary);
+            color: var(--primary);
             font-weight: 700;
         }
 
@@ -330,6 +341,129 @@
             margin-top: 0.5rem;
         }
 
+        /* Dashboard Leagues Section */
+        .dashboard-leagues {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .league-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .league-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            transition: var(--transition);
+        }
+
+        .league-card:hover::before {
+            left: 0;
+        }
+
+        .league-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.3);
+        }
+
+        .league-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .league-card:hover .league-icon {
+            transform: scale(1.15) rotate(360deg);
+            box-shadow: 0 6px 25px rgba(139, 0, 0, 0.5);
+        }
+
+        .league-card h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .league-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .league-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            border-top: 2px solid #f0f0f0;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .league-stat-item {
+            text-align: center;
+        }
+
+        .league-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .league-stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
+
+        .league-btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            margin: 0.3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: var(--gradient-primary);
+            color: #fff;
+        }
+
+        .league-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(139, 0, 0, 0.4);
+        }
+
         /* Info Cards */
         .info-cards {
             display: grid;
@@ -344,7 +478,7 @@
             border-radius: 16px;
             padding: 2.5rem 2rem;
             text-align: center;
-            transition: all 0.4s;
+            transition: var(--transition);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             backdrop-filter: blur(10px);
             position: relative;
@@ -358,7 +492,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #8B0000 0%, #FFD700 50%, #228B22 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
         }
 
         .info-card:hover {
@@ -384,7 +518,7 @@
 
         .info-card h3 {
             font-size: 2.5rem;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -393,9 +527,19 @@
         }
 
         .info-card p {
-            color: #7f8c8d;
+            color: var(--gray);
             font-size: 1rem;
             font-weight: 500;
+        }
+
+        /* League-specific sections */
+        .league-section {
+            display: none;
+        }
+
+        .league-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
 
         /* Sports Categories */
@@ -413,7 +557,7 @@
             border: 2px solid transparent;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
@@ -424,7 +568,7 @@
         }
 
         .category-tab.active {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             color: #fff;
             box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
         }
@@ -442,7 +586,7 @@
             border-radius: 20px;
             padding: 2.5rem 2rem;
             text-align: center;
-            transition: all 0.4s;
+            transition: var(--transition);
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             backdrop-filter: blur(10px);
@@ -458,7 +602,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
-            transition: left 0.5s;
+            transition: var(--transition);
         }
 
         .sport-card:hover::before {
@@ -473,14 +617,14 @@
         .sport-icon {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
             font-size: 3rem;
-            transition: all 0.4s;
+            transition: var(--transition);
             box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
         }
 
@@ -491,13 +635,13 @@
 
         .sport-card h3 {
             font-size: 1.6rem;
-            color: #2c3e50;
+            color: var(--dark);
             margin-bottom: 1rem;
             font-weight: 700;
         }
 
         .sport-card p {
-            color: #7f8c8d;
+            color: var(--gray);
             line-height: 1.6;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
@@ -519,7 +663,7 @@
         .stat-number {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -527,7 +671,7 @@
 
         .stat-label {
             font-size: 0.85rem;
-            color: #7f8c8d;
+            color: var(--gray);
             margin-top: 0.3rem;
             font-weight: 500;
         }
@@ -538,14 +682,14 @@
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-size: 0.95rem;
             margin: 0.3rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .register-btn {
-            background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
+            background: var(--gradient-accent);
             color: #fff;
         }
 
@@ -555,7 +699,7 @@
         }
 
         .view-btn {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             color: #fff;
         }
 
@@ -587,7 +731,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.6rem;
-            color: #2c3e50;
+            color: var(--dark);
             font-weight: 600;
             font-size: 0.95rem;
         }
@@ -600,7 +744,7 @@
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             font-size: 0.95rem;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-family: inherit;
         }
 
@@ -608,7 +752,7 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #8B0000;
+            border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
             transform: translateY(-2px);
         }
@@ -620,7 +764,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            background: var(--gradient-primary);
             color: #fff;
             padding: 1.2rem 3rem;
             border: none;
@@ -628,7 +772,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             width: 100%;
             box-shadow: 0 6px 20px rgba(139, 0, 0, 0.3);
         }
@@ -638,8 +782,49 @@
             box-shadow: 0 8px 30px rgba(139, 0, 0, 0.4);
         }
 
-        /* Results Section */
-        .results-section {
+        /* League Selection */
+        .league-selection {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .league-option {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .league-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(139, 0, 0, 0.3);
+        }
+
+        .league-option.active {
+            background: var(--gradient-primary);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .league-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Album Section */
+        .album-section {
             background: rgba(255, 255, 255, 0.95);
             border: none;
             border-radius: 20px;
@@ -649,88 +834,93 @@
             backdrop-filter: blur(10px);
         }
 
-        .results-container {
-            overflow-x: auto;
-        }
-
-        .results-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 2rem;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            min-width: 600px;
-        }
-
-        .results-table thead {
-            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
-            color: #fff;
-        }
-
-        .results-table th,
-        .results-table td {
-            padding: 1.2rem 1rem;
-            text-align: left;
-        }
-
-        .results-table th {
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .results-table tbody tr {
-            background: #fff;
-            transition: all 0.3s;
-        }
-
-        .results-table tbody tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .results-table tbody tr:hover {
-            background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
-            transform: scale(1.01);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .rank-badge {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            background: #8B0000;
-            color: #fff;
-            border-radius: 50%;
-            align-items: center;
+        .album-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
             justify-content: center;
+        }
+
+        .album-filter {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .album-filter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(139, 0, 0, 0.3);
+        }
+
+        .album-filter.active {
+            background: var(--gradient-primary);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .album-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .album-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.3);
+        }
+
+        .album-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .album-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .album-item:hover .album-overlay {
+            transform: translateY(0);
+        }
+
+        .album-title {
+            font-size: 1.2rem;
             font-weight: 700;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
         }
 
-        .rank-badge.gold {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-            animation: shimmer 2s infinite;
-        }
-
-        .rank-badge.silver {
-            background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
-        }
-
-        .rank-badge.bronze {
-            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: scale(1); box-shadow: 0 3px 10px rgba(243, 156, 18, 0.3); }
-            50% { transform: scale(1.1); box-shadow: 0 5px 20px rgba(243, 156, 18, 0.6); }
+        .album-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
             color: #ecf0f1;
             padding: 3.5rem 5% 2rem;
             margin-top: 4rem;
@@ -747,7 +937,7 @@
 
         .footer-section h3 {
             margin-bottom: 1.5rem;
-            color: #FFD700;
+            color: var(--secondary);
             font-size: 1.2rem;
             font-weight: 700;
         }
@@ -772,7 +962,7 @@
         }
 
         .footer-section a:hover {
-            color: #667eea;
+            color: var(--secondary);
         }
 
         .footer-bottom {
@@ -783,104 +973,12 @@
             font-size: 0.9rem;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: #fff;
-            border-radius: 20px;
-            padding: 3rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: #f0f0f0;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #7f8c8d;
-            transition: all 0.3s;
-        }
-
-        .modal-close:hover {
-            background: #667eea;
-            color: #fff;
-            transform: rotate(90deg);
-        }
-
-        .success-message {
-            background: linear-gradient(135deg, #d5f4e6 0%, #b2e8d0 100%);
-            color: #228B22;
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #228B22;
-            display: none;
-            box-shadow: 0 4px 12px rgba(34, 139, 34, 0.2);
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-primary);
             color: white;
             width: 50px;
             height: 50px;
@@ -892,7 +990,7 @@
             justify-content: center;
             font-size: 1.5rem;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s;
+            transition: var(--transition);
             z-index: 999;
         }
 
@@ -903,50 +1001,6 @@
 
         .scroll-top.show {
             display: flex;
-        }
-
-        /* Add error styling for form validation */
-        .form-group input.error,
-        .form-group select.error,
-        .form-group textarea.error {
-            border-color: #e74c3c;
-            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1);
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        /* Loading state for buttons */
-        .btn-loading {
-            position: relative;
-            color: transparent;
-        }
-
-        .btn-loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 2px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -996,7 +1050,7 @@
                 border-radius: 12px;
                 box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                 background: rgba(255, 255, 255, 0.9);
-                transition: all 0.3s ease;
+                transition: var(--transition);
             }
 
             nav a:hover {
@@ -1004,22 +1058,11 @@
                 box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
             }
 
-            .nav-icon {
-                display: inline;
-                font-size: 1.5rem;
-            }
-
-            .nav-text {
-                display: inline;
-                font-size: 1.1rem;
-                font-weight: 600;
-            }
-
             .mobile-menu-close {
                 position: absolute;
                 top: 2rem;
                 right: 2rem;
-                background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+                background: var(--gradient-primary);
                 color: white;
                 border: none;
                 width: 50px;
@@ -1069,38 +1112,28 @@
                 font-size: 1.8rem;
             }
 
+            .dashboard-leagues {
+                grid-template-columns: 1fr;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
             }
 
-            .sports-grid {
-                grid-template-columns: 1fr;
+            .league-selection {
+                flex-direction: column;
             }
 
-            .info-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .category-tabs {
-                justify-content: center;
+            .album-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
 
             .main-content {
                 padding: 2rem 3%;
             }
 
-            .registration-section,
-            .results-section {
+            .registration-section, .album-section {
                 padding: 2rem 1.5rem;
-            }
-
-            .results-table {
-                font-size: 0.85rem;
-            }
-
-            .results-table th,
-            .results-table td {
-                padding: 0.8rem 0.5rem;
             }
 
             .footer-content {
@@ -1131,10 +1164,6 @@
                 font-size: 1.4rem;
             }
 
-            .modal-content {
-                padding: 2rem 1.5rem;
-            }
-
             .section-title {
                 font-size: 1.5rem;
             }
@@ -1145,8 +1174,8 @@
                 font-size: 1.1rem;
             }
 
-            .nav-icon {
-                font-size: 1.3rem;
+            .album-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1156,11 +1185,11 @@
         <div class="header-main">
             <div class="logo-section">
                 <div class="logo">
-                    <img src="muitlogo.png" alt="MUIT Logo" onerror="this.parentElement.innerHTML='<span style=\'color:white;font-size:2rem;font-weight:bold\'>MS</span>'">
+                    <img src="muitlogo.png" alt="MUIT Logo" onerror="this.parentElement.innerHTML='<span style=\'color:white;font-size:2rem;font-weight:bold\'>MS</span>'; this.style.color='white'; this.style.fontSize='2rem'; this.style.fontWeight='bold'">
                 </div>
                 <div class="logo-text">
-                    <h1>MUIT Sports League</h1>
-                    <p>Sports League Management System</p>
+                    <h1>MUIT SPORTS</h1>
+                    <p>Maharishi Sports League</p>
                 </div>
             </div>
             <div class="nav-container">
@@ -1168,19 +1197,23 @@
                 <nav id="main-nav">
                     <button class="mobile-menu-close" onclick="toggleMobileMenu()" style="display: none;">✕</button>
                     <a href="#" class="nav-link active" data-section="home">
-                        <span class="nav-icon">🏠</span>
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
                         <span class="nav-text">Home</span>
                     </a>
-                    <a href="#" class="nav-link" data-section="sports">
-                        <span class="nav-icon">⚽</span>
-                        <span class="nav-text">Sports</span>
+                    <a href="#" class="nav-link" data-section="leagues">
+                        <span class="nav-icon"><i class="fas fa-trophy"></i></span>
+                        <span class="nav-text">Leagues</span>
                     </a>
                     <a href="#" class="nav-link" data-section="register">
-                        <span class="nav-icon">📝</span>
+                        <span class="nav-icon"><i class="fas fa-user-plus"></i></span>
                         <span class="nav-text">Register</span>
                     </a>
+                    <a href="#" class="nav-link" data-section="album">
+                        <span class="nav-icon"><i class="fas fa-images"></i></span>
+                        <span class="nav-text">Album</span>
+                    </a>
                     <a href="#" class="nav-link" data-section="results">
-                        <span class="nav-icon">🏆</span>
+                        <span class="nav-icon"><i class="fas fa-chart-bar"></i></span>
                         <span class="nav-text">Results</span>
                     </a>
                 </nav>
@@ -1198,10 +1231,10 @@
 
     <section class="hero-banner">
         <div class="hero-content">
-            <h2>MUIT Sportys Dashboard</h2>
-            <p>Complete Sports League Management and Registration Portal</p>
+            <h2>MUIT SPORTS</h2>
+            <p>Maharishi Sports League and Registration Portal</p>
             <div class="cta-buttons">
-                <button class="cta-btn cta-btn-primary" onclick="showSection('sports')">View All Sports</button>
+                <button class="cta-btn cta-btn-primary" onclick="showSection('leagues')">View All Leagues</button>
             </div>
         </div>
     </section>
@@ -1211,334 +1244,454 @@
         <div id="home-section" class="content-section">
             <div class="info-cards">
                 <div class="info-card">
-                    <div class="info-card-icon">🏆</div>
-                    <h3>18</h3>
-                    <p>Sports Categories</p>
+                    <div class="info-card-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>3</h3>
+                    <p>Sports Leagues</p>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-icon">👥</div>
+                    <div class="info-card-icon"><i class="fas fa-users"></i></div>
                     <h3 id="total-registrations">1,245</h3>
                     <p>Registered Athletes</p>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-icon">📅</div>
+                    <div class="info-card-icon"><i class="fas fa-calendar-alt"></i></div>
                     <h3>28</h3>
                     <p>Upcoming Events</p>
                 </div>
                 <div class="info-card">
-                    <div class="info-card-icon">🎖️</div>
+                    <div class="info-card-icon"><i class="fas fa-medal"></i></div>
                     <h3>150+</h3>
                     <p>Matches Completed</p>
                 </div>
             </div>
+            
+            <!-- Leagues Dashboard -->
+            <div class="section-header">
+                <h2 class="section-title">Sports Leagues</h2>
+                <p class="section-subtitle">Choose from our three premier sports leagues</p>
+            </div>
+            
+            <div class="dashboard-leagues">
+                <div class="league-card" onclick="showLeague('mpl')">
+                    <div class="league-icon"><i class="fas fa-baseball-ball"></i></div>
+                    <h3>MPL</h3>
+                    <p>Maharishi Premier League - Inter-college cricket tournament featuring teams from all participating colleges</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">12</div>
+                            <div class="league-stat-label">Colleges</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">48</div>
+                            <div class="league-stat-label">Matches</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
+
+                <div class="league-card" onclick="showLeague('mfl')">
+                    <div class="league-icon"><i class="fas fa-futbol"></i></div>
+                    <h3>MFL</h3>
+                    <p>Maharishi Football League - Inter-college football championship with teams from all participating colleges</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">16</div>
+                            <div class="league-stat-label">Colleges</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">60</div>
+                            <div class="league-stat-label">Matches</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
+
+                <div class="league-card" onclick="showLeague('msl')">
+                    <div class="league-icon"><i class="fas fa-medal"></i></div>
+                    <h3>MSL</h3>
+                    <p>Maharishi Sports League - Intra-college sports competition featuring multiple sports disciplines</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">18</div>
+                            <div class="league-stat-label">Sports</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">42</div>
+                            <div class="league-stat-label">Events</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Sports Section -->
-        <div id="sports-section" class="content-section" style="display: none;">
+        <!-- Leagues Section -->
+        <div id="leagues-section" class="content-section" style="display: none;">
             <div class="section-header">
-                <h2 class="section-title">All Sports Categories</h2>
-                <p class="section-subtitle">Browse and register for your favorite sports</p>
+                <h2 class="section-title">All Leagues</h2>
+                <p class="section-subtitle">Browse and select from our three premier sports leagues</p>
             </div>
+            
+            <div class="dashboard-leagues">
+                <div class="league-card" onclick="showLeague('mpl')">
+                    <div class="league-icon"><i class="fas fa-baseball-ball"></i></div>
+                    <h3>MPL</h3>
+                    <p>Maharishi Premier League - Inter-college cricket tournament featuring teams from all participating colleges</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">12</div>
+                            <div class="league-stat-label">Colleges</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">48</div>
+                            <div class="league-stat-label">Matches</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
 
-            <div class="category-tabs">
-                <div class="category-tab active" onclick="filterSports('all')">All Sports</div>
-                <div class="category-tab" onclick="filterSports('team')">Team Sports</div>
-                <div class="category-tab" onclick="filterSports('individual')">Individual Sports</div>
-                <div class="category-tab" onclick="filterSports('track')">Track & Field</div>
-                <div class="category-tab" onclick="filterSports('indoor')">Indoor Games</div>
+                <div class="league-card" onclick="showLeague('mfl')">
+                    <div class="league-icon"><i class="fas fa-futbol"></i></div>
+                    <h3>MFL</h3>
+                    <p>Maharishi Football League - Inter-college football championship with teams from all participating colleges</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">16</div>
+                            <div class="league-stat-label">Colleges</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">60</div>
+                            <div class="league-stat-label">Matches</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
+
+                <div class="league-card" onclick="showLeague('msl')">
+                    <div class="league-icon"><i class="fas fa-medal"></i></div>
+                    <h3>MSL</h3>
+                    <p>Maharishi Sports League - Intra-college sports competition featuring multiple sports disciplines</p>
+                    <div class="league-stats">
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">18</div>
+                            <div class="league-stat-label">Sports</div>
+                        </div>
+                        <div class="league-stat-item">
+                            <div class="league-stat-number">42</div>
+                            <div class="league-stat-label">Events</div>
+                        </div>
+                    </div>
+                    <button class="league-btn">View League</button>
+                </div>
             </div>
-
-            <div class="sports-grid" id="sports-grid">
-                <!-- Team Sports -->
-                <div class="sport-card" data-category="team" data-sport="Football">
-                    <div class="sport-icon">⚽</div>
-                    <h3>Football</h3>
-                    <p>11-a-side football championship with league format</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">16</div>
-                            <div class="stat-label">Teams</div>
+            
+            <!-- League-specific content sections -->
+            <div id="mpl-section" class="league-section">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: var(--dark);">Maharishi Premier League (MPL)</h2>
+                    <p class="section-subtitle" style="color: var(--gray);">Inter-college Cricket Tournament</p>
+                </div>
+                
+                <div class="sports-grid">
+                    <div class="sport-card" data-category="team" data-sport="Cricket">
+                        <div class="sport-icon"><i class="fas fa-baseball-ball"></i></div>
+                        <h3>Cricket</h3>
+                        <p>T20 and ODI format cricket tournaments between colleges</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Colleges</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">48</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">45</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Cricket', 'MPL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Cricket')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Football')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Football')">View League</button>
+                </div>
+            </div>
+            
+            <div id="mfl-section" class="league-section">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: var(--dark);">Maharishi Football League (MFL)</h2>
+                    <p class="section-subtitle" style="color: var(--gray);">Inter-college Football Championship</p>
+                </div>
+                
+                <div class="sports-grid">
+                    <div class="sport-card" data-category="team" data-sport="Football">
+                        <div class="sport-icon"><i class="fas fa-futbol"></i></div>
+                        <h3>Football</h3>
+                        <p>11-a-side football championship with league format between colleges</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">16</div>
+                                <div class="stat-label">Colleges</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">60</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
+                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Football', 'MFL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Football')">View League</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="msl-section" class="league-section">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: var(--dark);">Maharishi Sports League (MSL)</h2>
+                    <p class="section-subtitle" style="color: var(--gray);">Intra-college Sports Competition</p>
+                </div>
+                
+                <div class="category-tabs">
+                    <div class="category-tab active" onclick="filterSports('all')">All Sports</div>
+                    <div class="category-tab" onclick="filterSports('team')">Team Sports</div>
+                    <div class="category-tab" onclick="filterSports('individual')">Individual Sports</div>
+                    <div class="category-tab" onclick="filterSports('track')">Track & Field</div>
+                    <div class="category-tab" onclick="filterSports('indoor')">Indoor Games</div>
                 </div>
 
-                <div class="sport-card" data-category="team" data-sport="Cricket">
-                    <div class="sport-icon">🏏</div>
-                    <h3>Cricket</h3>
-                    <p>T20 and ODI format cricket tournaments</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">14</div>
-                            <div class="stat-label">Teams</div>
+                <div class="sports-grid" id="sports-grid">
+                    <!-- Team Sports -->
+                    <div class="sport-card" data-category="team" data-sport="Football">
+                        <div class="sport-icon"><i class="fas fa-futbol"></i></div>
+                        <h3>Football</h3>
+                        <p>11-a-side football championship with league format</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">16</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">45</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">52</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Football', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Football')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Cricket')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Cricket')">View League</button>
-                </div>
 
-                <div class="sport-card" data-category="team" data-sport="Basketball">
-                    <div class="sport-icon">🏀</div>
-                    <h3>Basketball</h3>
-                    <p>5-on-5 basketball tournament with knockout rounds</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">12</div>
-                            <div class="stat-label">Teams</div>
+                    <div class="sport-card" data-category="team" data-sport="Volleyball">
+                        <div class="sport-icon"><i class="fas fa-volleyball-ball"></i></div>
+                        <h3>Volleyball</h3>
+                        <p>Indoor volleyball with 6 players per team</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">10</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">28</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">36</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Volleyball', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Volleyball')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Basketball')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Basketball')">View League</button>
-                </div>
 
-                <div class="sport-card" data-category="team" data-sport="Volleyball">
-                    <div class="sport-icon">🏐</div>
-                    <h3>Volleyball</h3>
-                    <p>Indoor volleyball with 6 players per team</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10</div>
-                            <div class="stat-label">Teams</div>
+                    <div class="sport-card" data-category="team" data-sport="Basketball">
+                        <div class="sport-icon"><i class="fas fa-basketball-ball"></i></div>
+                        <h3>Basketball</h3>
+                        <p>5-on-5 basketball tournament with knockout rounds</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">36</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">28</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Basketball', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Basketball')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Volleyball')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Volleyball')">View League</button>
-                </div>
 
-                <div class="sport-card" data-category="team" data-sport="Kabaddi">
-                    <div class="sport-icon">🤼</div>
-                    <h3>Kabaddi</h3>
-                    <p>Traditional Indian contact sport championship</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">8</div>
-                            <div class="stat-label">Teams</div>
+                    <div class="sport-card" data-category="team" data-sport="Kabaddi">
+                        <div class="sport-icon"><i class="fas fa-user-friends"></i></div>
+                        <h3>Kabaddi</h3>
+                        <p>Traditional Indian contact sport championship</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Kabaddi', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Kabaddi')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Kabaddi')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Kabaddi')">View League</button>
-                </div>
 
-                <div class="sport-card" data-category="team" data-sport="Tug of War">
-                    <div class="sport-icon">🪢</div>
-                    <h3>Tug of War</h3>
-                    <p>Team strength competition with 8 members each</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">16</div>
-                            <div class="stat-label">Teams</div>
+                    <div class="sport-card" data-category="team" data-sport="Tug of War">
+                        <div class="sport-icon"><i class="fas fa-people-pulling"></i></div>
+                        <h3>Tug of War</h3>
+                        <p>Team strength competition with 8 members each</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">16</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">32</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">32</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Tug of War', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Tug of War')">View League</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Tug of War')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Tug of War')">View League</button>
-                </div>
 
-                <!-- Track & Field -->
-                <div class="sport-card" data-category="track" data-sport="100m Sprint">
-                    <div class="sport-icon">🏃</div>
-                    <h3>100m Sprint</h3>
-                    <p>100 meter sprint race - individual event</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">48</div>
-                            <div class="stat-label">Athletes</div>
+                    <!-- Individual Sports -->
+                    <div class="sport-card" data-category="individual" data-sport="Badminton Singles">
+                        <div class="sport-icon"><i class="fas fa-table-tennis"></i></div>
+                        <h3>Badminton Singles</h3>
+                        <p>Singles badminton championship tournament</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">64</div>
+                                <div class="stat-label">Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">32</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">8</div>
-                            <div class="stat-label">Heats</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Badminton Singles', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Badminton Singles')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('100m Sprint')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('100m Sprint')">View Results</button>
-                </div>
 
-                <div class="sport-card" data-category="track" data-sport="200m Sprint">
-                    <div class="sport-icon">🏃‍♀️</div>
-                    <h3>200m Sprint</h3>
-                    <p>200 meter sprint race - individual event</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">42</div>
-                            <div class="stat-label">Athletes</div>
+                    <div class="sport-card" data-category="individual" data-sport="Badminton Doubles">
+                        <div class="sport-icon"><i class="fas fa-table-tennis"></i></div>
+                        <h3>Badminton Doubles</h3>
+                        <p>Doubles badminton championship tournament</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">32</div>
+                                <div class="stat-label">Teams</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">16</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">7</div>
-                            <div class="stat-label">Heats</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Badminton Doubles', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Badminton Doubles')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('200m Sprint')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('200m Sprint')">View Results</button>
-                </div>
 
-                <div class="sport-card" data-category="track individual" data-sport="Shot Put">
-                    <div class="sport-icon">⚾</div>
-                    <h3>Shot Put</h3>
-                    <p>Track and field throwing event</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">32</div>
-                            <div class="stat-label">Athletes</div>
+                    <div class="sport-card" data-category="individual" data-sport="Table Tennis">
+                        <div class="sport-icon"><i class="fas fa-table-tennis"></i></div>
+                        <h3>Table Tennis</h3>
+                        <p>Fast-paced indoor table tennis tournament</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">56</div>
+                                <div class="stat-label">Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">36</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Rounds</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Table Tennis', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Table Tennis')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Shot Put')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Shot Put')">View Results</button>
-                </div>
 
-                <div class="sport-card" data-category="track" data-sport="Long Jump">
-                    <div class="sport-icon">🦘</div>
-                    <h3>Long Jump</h3>
-                    <p>Athletics field event testing jumping distance</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">28</div>
-                            <div class="stat-label">Athletes</div>
+                    <!-- Track & Field -->
+                    <div class="sport-card" data-category="track" data-sport="100m Sprint">
+                        <div class="sport-icon"><i class="fas fa-running"></i></div>
+                        <h3>100m Sprint</h3>
+                        <p>100 meter sprint race - individual event</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">48</div>
+                                <div class="stat-label">Athletes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Heats</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Rounds</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('100m Sprint', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('100m Sprint')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Long Jump')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Long Jump')">View Results</button>
-                </div>
 
-                <div class="sport-card" data-category="track" data-sport="High Jump">
-                    <div class="sport-icon">🧗</div>
-                    <h3>High Jump</h3>
-                    <p>Athletics field event testing vertical jumping ability</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">24</div>
-                            <div class="stat-label">Athletes</div>
+                    <div class="sport-card" data-category="track" data-sport="200m Sprint">
+                        <div class="sport-icon"><i class="fas fa-running"></i></div>
+                        <h3>200m Sprint</h3>
+                        <p>200 meter sprint race - individual event</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">42</div>
+                                <div class="stat-label">Athletes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">7</div>
+                                <div class="stat-label">Heats</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Rounds</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('200m Sprint', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('200m Sprint')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('High Jump')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('High Jump')">View Results</button>
-                </div>
 
-                <!-- Individual Sports -->
-                <div class="sport-card" data-category="individual" data-sport="Badminton">
-                    <div class="sport-icon">🏸</div>
-                    <h3>Badminton</h3>
-                    <p>Singles and doubles badminton championship</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">64</div>
-                            <div class="stat-label">Players</div>
+                    <div class="sport-card" data-category="track" data-sport="Long Jump">
+                        <div class="sport-icon"><i class="fas fa-long-arrow-alt-right"></i></div>
+                        <h3>Long Jump</h3>
+                        <p>Athletics field event testing jumping distance</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">28</div>
+                                <div class="stat-label">Athletes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Rounds</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">32</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Long Jump', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Long Jump')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Badminton')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Badminton')">View Results</button>
-                </div>
 
-                <div class="sport-card" data-category="individual" data-sport="Lawn Tennis">
-                    <div class="sport-icon">🎾</div>
-                    <h3>Lawn Tennis</h3>
-                    <p>Professional tennis matches on grass court</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">48</div>
-                            <div class="stat-label">Players</div>
+                    <!-- Indoor Games -->
+                    <div class="sport-card" data-category="indoor" data-sport="Carrom">
+                        <div class="sport-icon"><i class="fas fa-dice"></i></div>
+                        <h3>Carrom</h3>
+                        <p>Traditional board game tournament</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">40</div>
+                                <div class="stat-label">Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">28</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Carrom', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Carrom')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Lawn Tennis')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Lawn Tennis')">View Results</button>
-                </div>
 
-                <!-- Indoor Games -->
-                <div class="sport-card" data-category="indoor" data-sport="Table Tennis">
-                    <div class="sport-icon">🏓</div>
-                    <h3>Table Tennis</h3>
-                    <p>Fast-paced indoor table tennis tournament</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">56</div>
-                            <div class="stat-label">Players</div>
+                    <div class="sport-card" data-category="indoor" data-sport="Chess">
+                        <div class="sport-icon"><i class="fas fa-chess"></i></div>
+                        <h3>Chess</h3>
+                        <p>Strategic chess championship tournament</p>
+                        <div class="sport-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">72</div>
+                                <div class="stat-label">Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">45</div>
+                                <div class="stat-label">Matches</div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">36</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
+                        <button class="register-btn" onclick="openRegistrationModal('Chess', 'MSL')">Register Now</button>
+                        <button class="view-btn" onclick="showResults('Chess')">View Results</button>
                     </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Table Tennis')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Table Tennis')">View Results</button>
-                </div>
-
-                <div class="sport-card" data-category="indoor" data-sport="Carrom">
-                    <div class="sport-icon">🎯</div>
-                    <h3>Carrom</h3>
-                    <p>Traditional board game tournament</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">40</div>
-                            <div class="stat-label">Players</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">25</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
-                    </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Carrom')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Carrom')">View Results</button>
-                </div>
-
-                <div class="sport-card" data-category="indoor" data-sport="Chess">
-                    <div class="sport-icon">♟️</div>
-                    <h3>Chess</h3>
-                    <p>Strategic chess championship tournament</p>
-                    <div class="sport-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">72</div>
-                            <div class="stat-label">Players</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">45</div>
-                            <div class="stat-label">Matches</div>
-                        </div>
-                    </div>
-                    <button class="register-btn" onclick="openRegistrationModal('Chess')">Register Now</button>
-                    <button class="view-btn" onclick="showResults('Chess')">View Results</button>
                 </div>
             </div>
         </div>
@@ -1546,8 +1699,26 @@
         <!-- Registration Section -->
         <div id="register-section" class="content-section registration-section" style="display: none;">
             <div class="section-header">
-                <h2 class="section-title" style="color: #2c3e50;">Sports Registration</h2>
-                <p class="section-subtitle" style="color: #7f8c8d;">Register yourself for upcoming sports events</p>
+                <h2 class="section-title" style="color: var(--dark);">Sports Registration</h2>
+                <p class="section-subtitle" style="color: var(--gray);">Register yourself for upcoming sports events</p>
+            </div>
+
+            <div class="league-selection">
+                <div class="league-option active" data-league="msl">
+                    <i class="fas fa-medal"></i>
+                    <h3>MSL</h3>
+                    <p>Maharishi Sports League</p>
+                </div>
+                <div class="league-option" data-league="mpl">
+                    <i class="fas fa-baseball-ball"></i>
+                    <h3>MPL</h3>
+                    <p>Maharishi Premier League</p>
+                </div>
+                <div class="league-option" data-league="mfl">
+                    <i class="fas fa-futbol"></i>
+                    <h3>MFL</h3>
+                    <p>Maharishi Football League</p>
+                </div>
             </div>
 
             <div class="success-message" id="success-message">
@@ -1613,22 +1784,7 @@
                     <label for="sport">Select Sport *</label>
                     <select id="sport" required>
                         <option value="">Choose a sport</option>
-                        <option value="Football">Football</option>
-                        <option value="Cricket">Cricket</option>
-                        <option value="Basketball">Basketball</option>
-                        <option value="Volleyball">Volleyball</option>
-                        <option value="Kabaddi">Kabaddi</option>
-                        <option value="Tug of War">Tug of War</option>
-                        <option value="100m Sprint">100m Sprint</option>
-                        <option value="200m Sprint">200m Sprint</option>
-                        <option value="Shot Put">Shot Put</option>
-                        <option value="Long Jump">Long Jump</option>
-                        <option value="High Jump">High Jump</option>
-                        <option value="Badminton">Badminton</option>
-                        <option value="Lawn Tennis">Lawn Tennis</option>
-                        <option value="Table Tennis">Table Tennis</option>
-                        <option value="Carrom">Carrom</option>
-                        <option value="Chess">Chess</option>
+                        <!-- Sports will be populated based on league selection -->
                     </select>
                     <div class="error-message"></div>
                 </div>
@@ -1668,26 +1824,50 @@
             </form>
         </div>
 
-        <!-- Results Section -->
-        <div id="results-section" class="content-section results-section" style="display: none;">
+        <!-- Album Section -->
+        <div id="album-section" class="content-section album-section" style="display: none;">
             <div class="section-header">
-                <h2 class="section-title" style="color: #2c3e50;">Results & Standings</h2>
-                <p class="section-subtitle" style="color: #7f8c8d;">View current standings and match results</p>
+                <h2 class="section-title" style="color: var(--dark);">Sports Album</h2>
+                <p class="section-subtitle" style="color: var(--gray);">Relive the memorable moments from our sports events</p>
             </div>
 
-            <div class="form-group" style="max-width: 400px; margin: 0 auto 2rem;">
-                <label for="results-sport">Select Sport</label>
-                <select id="results-sport" onchange="updateResults(this.value)">
-                    <option value="Football">Football</option>
-                    <option value="Cricket">Cricket</option>
-                    <option value="Basketball">Basketball</option>
-                    <option value="Volleyball">Volleyball</option>
-                    <option value="Kabaddi">Kabaddi</option>
-                    <option value="100m Sprint">100m Sprint</option>
-                    <option value="Badminton">Badminton</option>
-                    <option value="Table Tennis">Table Tennis</option>
-                    <option value="Chess">Chess</option>
-                </select>
+            <div class="album-filters">
+                <div class="album-filter active" data-filter="all">All Events</div>
+                <div class="album-filter" data-filter="msl">MSL</div>
+                <div class="album-filter" data-filter="mpl">MPL</div>
+                <div class="album-filter" data-filter="mfl">MFL</div>
+                <div class="album-filter" data-filter="football">Football</div>
+                <div class="album-filter" data-filter="cricket">Cricket</div>
+            </div>
+
+            <div class="album-grid" id="album-grid">
+                <!-- Album items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-section" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title" style="color: var(--dark);">Results & Standings</h2>
+                <p class="section-subtitle" style="color: var(--gray);">View current standings and match results</p>
+            </div>
+
+            <div class="league-selection">
+                <div class="league-option active" data-league="msl">
+                    <i class="fas fa-medal"></i>
+                    <h3>MSL</h3>
+                    <p>Maharishi Sports League</p>
+                </div>
+                <div class="league-option" data-league="mpl">
+                    <i class="fas fa-baseball-ball"></i>
+                    <h3>MPL</h3>
+                    <p>Maharishi Premier League</p>
+                </div>
+                <div class="league-option" data-league="mfl">
+                    <i class="fas fa-futbol"></i>
+                    <h3>MFL</h3>
+                    <p>Maharishi Football League</p>
+                </div>
             </div>
 
             <div class="results-container">
@@ -1711,19 +1891,8 @@
         </div>
     </main>
 
-    <!-- Registration Modal -->
-    <div class="modal" id="registration-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Quick Registration</h2>
-            <p style="color: #7f8c8d; margin-bottom: 1.5rem;">You are registering for: <strong id="modal-sport-name" style="color: #667eea;"></strong></p>
-            <p style="color: #7f8c8d;">Please go to the <a href="#" onclick="closeModal(); showSection('register'); return false;" style="color: #667eea; font-weight: 600;">Registration Page</a> to complete your registration.</p>
-            <button class="submit-btn" onclick="closeModal(); showSection('register')" style="margin-top: 1.5rem;">Go to Registration</button>
-        </div>
-    </div>
-
     <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
 
     <footer>
         <div class="footer-content">
@@ -1739,27 +1908,27 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#" onclick="showSection('sports'); return false;">All Sports</a></li>
+                    <li><a href="#" onclick="showSection('leagues'); return false;">All Leagues</a></li>
                     <li><a href="#" onclick="showSection('register'); return false;">Register</a></li>
+                    <li><a href="#" onclick="showSection('album'); return false;">Album</a></li>
                     <li><a href="#" onclick="showSection('results'); return false;">Results</a></li>
-                    <li><a href="#">Events Calendar</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <ul>
-                    <li>📧 sports@muitnoida.edu.in</li>
-                    <li>📞 +91-120-2585000</li>
-                    <li>📍 MUIT Campus, Noida, UP</li>
+                    <li><i class="fas fa-envelope"></i> sports@muitnoida.edu.in</li>
+                    <li><i class="fas fa-phone"></i> +91-120-2585000</li>
+                    <li><i class="fas fa-map-marker-alt"></i> MUIT Campus, Noida, UP</li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
                 </ul>
             </div>
         </div>
@@ -1769,10 +1938,6 @@
     </footer>
 
     <script>
-        // Store registrations in memory
-        const registrations = [];
-        let totalRegistrations = 1245;
-
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const nav = document.getElementById('main-nav');
@@ -1813,8 +1978,9 @@
             
             const breadcrumbMap = {
                 'home': 'Sports Dashboard',
-                'sports': 'All Sports',
+                'leagues': 'All Leagues',
                 'register': 'Registration',
+                'album': 'Sports Album',
                 'results': 'Results & Standings'
             };
             document.getElementById('breadcrumb-current').textContent = breadcrumbMap[section];
@@ -1823,7 +1989,64 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Sports filtering
+        // New function to show specific league
+        function showLeague(league) {
+            showSection('leagues');
+            
+            // Hide all league sections
+            document.querySelectorAll('.league-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected league section
+            document.getElementById(league + '-section').classList.add('active');
+            
+            // Update breadcrumb
+            const leagueNames = {
+                'mpl': 'Maharishi Premier League',
+                'mfl': 'Maharishi Football League',
+                'msl': 'Maharishi Sports League'
+            };
+            document.getElementById('breadcrumb-current').textContent = leagueNames[league];
+        }
+
+        // League selection in registration and results
+        document.querySelectorAll('.league-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.league-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                const league = this.dataset.league;
+                updateSportsDropdown(league);
+                updateResults(league);
+            });
+        });
+
+        // Sports data for each league
+        const leagueSports = {
+            'msl': ['Football', 'Volleyball', 'Basketball', 'Kabaddi', 'Tug of War', 'Badminton Singles', 'Badminton Doubles', 'Table Tennis', '100m Sprint', '200m Sprint', 'Long Jump', 'Carrom', 'Chess'],
+            'mpl': ['Cricket'],
+            'mfl': ['Football']
+        };
+
+        // Update sports dropdown based on league selection
+        function updateSportsDropdown(league) {
+            const sportSelect = document.getElementById('sport');
+            sportSelect.innerHTML = '<option value="">Choose a sport</option>';
+            
+            if (leagueSports[league]) {
+                leagueSports[league].forEach(sport => {
+                    const option = document.createElement('option');
+                    option.value = sport;
+                    option.textContent = sport;
+                    sportSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Sports filtering in MSL
         function filterSports(category) {
             const cards = document.querySelectorAll('.sport-card');
             document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
@@ -1839,17 +2062,6 @@
             });
         }
 
-        // Registration Modal
-        function openRegistrationModal(sportName) {
-            document.getElementById('modal-sport-name').textContent = sportName;
-            document.getElementById('sport').value = sportName;
-            document.getElementById('registration-modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('registration-modal').classList.remove('active');
-        }
-
         // Show/hide team name field
         document.getElementById('category').addEventListener('change', function() {
             const teamNameGroup = document.getElementById('team-name-group');
@@ -1861,201 +2073,77 @@
             }
         });
 
-        // Form validation function
-        function validateForm() {
-            let isValid = true;
-            const requiredFields = document.querySelectorAll('input[required], select[required]');
-            
-            // Clear previous errors
-            document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
-            document.querySelectorAll('.error-message').forEach(msg => msg.classList.remove('show'));
-            
-            // Check each required field
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    const errorMsg = field.parentNode.querySelector('.error-message');
-                    if (errorMsg) {
-                        errorMsg.textContent = 'This field is required';
-                        errorMsg.classList.add('show');
-                    }
-                    isValid = false;
-                }
-            });
-            
-            // Validate email format
-            const emailField = document.getElementById('email');
-            if (emailField.value && !isValidEmail(emailField.value)) {
-                emailField.classList.add('error');
-                const errorMsg = emailField.parentNode.querySelector('.error-message');
-                if (errorMsg) {
-                    errorMsg.textContent = 'Please enter a valid email address';
-                    errorMsg.classList.add('show');
-                }
-                isValid = false;
-            }
-            
-            // Validate phone number
-            const phoneField = document.getElementById('phone');
-            if (phoneField.value && !isValidPhone(phoneField.value)) {
-                phoneField.classList.add('error');
-                const errorMsg = phoneField.parentNode.querySelector('.error-message');
-                if (errorMsg) {
-                    errorMsg.textContent = 'Please enter a valid phone number';
-                    errorMsg.classList.add('show');
-                }
-                isValid = false;
-            }
-            
-            return isValid;
-        }
-
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function isValidPhone(phone) {
-            const phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
-            return phoneRegex.test(phone.replace(/\s/g, ''));
-        }
-
         // Registration form submission
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validate form
-            if (!validateForm()) {
-                // Scroll to first error
-                const firstError = document.querySelector('.error');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                return;
-            }
+            // Get selected league
+            const selectedLeague = document.querySelector('.league-option.active').dataset.league;
             
-            // Show loading state
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.classList.add('btn-loading');
-            submitBtn.disabled = true;
+            // Show success message
+            const regId = 'MUIT-' + Date.now();
+            document.getElementById('reg-id').textContent = regId;
+            document.getElementById('success-message').classList.add('show');
             
-            // Simulate API call delay
+            // Reset form
+            this.reset();
+            document.getElementById('team-name-group').style.display = 'none';
+            
+            // Update registration count
+            const totalRegistrations = document.getElementById('total-registrations');
+            totalRegistrations.textContent = (parseInt(totalRegistrations.textContent.replace(',', '')) + 1).toLocaleString();
+            
+            // Hide success message after 7 seconds
             setTimeout(() => {
-                const formData = {
-                    id: 'MUIT-' + Date.now(),
-                    fullname: document.getElementById('fullname').value,
-                    enrollment: document.getElementById('enrollment').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    department: document.getElementById('department').value,
-                    year: document.getElementById('year').value,
-                    sport: document.getElementById('sport').value,
-                    category: document.getElementById('category').value,
-                    teamname: document.getElementById('teamname').value,
-                    experience: document.getElementById('experience').value,
-                    comments: document.getElementById('comments').value,
-                    date: new Date().toLocaleDateString()
-                };
-                
-                registrations.push(formData);
-                totalRegistrations++;
-                document.getElementById('total-registrations').textContent = totalRegistrations.toLocaleString();
-                
-                // Show success message
-                document.getElementById('reg-id').textContent = formData.id;
-                document.getElementById('success-message').classList.add('show');
-                
-                // Reset form
-                this.reset();
-                document.getElementById('team-name-group').style.display = 'none';
-                
-                // Reset button state
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                
-                // Hide success message after 7 seconds
-                setTimeout(() => {
-                    document.getElementById('success-message').classList.remove('show');
-                }, 7000);
-                
-                // Scroll to success message
-                document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1500);
+                document.getElementById('success-message').classList.remove('show');
+            }, 7000);
+            
+            // Scroll to success message
+            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        // Results data for all sports
+        // Results data for all leagues
         const resultsData = {
-            'Football': [
-                { rank: 1, name: 'CSE Warriors', played: 12, won: 9, lost: 1, draw: 2, points: 29 },
-                { rank: 2, name: 'ECE Tigers', played: 12, won: 8, lost: 2, draw: 2, points: 26 },
-                { rank: 3, name: 'Mech United', played: 12, won: 7, lost: 3, draw: 2, points: 23 },
-                { rank: 4, name: 'Civil Strikers', played: 12, won: 6, lost: 4, draw: 2, points: 20 },
-                { rank: 5, name: 'EE Lightning', played: 12, won: 5, lost: 5, draw: 2, points: 17 }
-            ],
-            'Cricket': [
-                { rank: 1, name: 'MBA Titans', played: 10, won: 8, lost: 2, draw: 0, points: 16 },
-                { rank: 2, name: 'CSE Kings', played: 10, won: 7, lost: 3, draw: 0, points: 14 },
-                { rank: 3, name: 'ECE Challengers', played: 10, won: 6, lost: 4, draw: 0, points: 12 },
-                { rank: 4, name: 'Mech Warriors', played: 10, won: 4, lost: 6, draw: 0, points: 8 },
-                { rank: 5, name: 'Civil Defenders', played: 10, won: 2, lost: 8, draw: 0, points: 4 }
-            ],
-            'Basketball': [
-                { rank: 1, name: 'CSE Hoops', played: 8, won: 7, lost: 1, draw: 0, points: 14 },
-                { rank: 2, name: 'ECE Dunkers', played: 8, won: 6, lost: 2, draw: 0, points: 12 },
-                { rank: 3, name: 'Mech Shooters', played: 8, won: 4, lost: 4, draw: 0, points: 8 },
-                { rank: 4, name: 'BBA Ballers', played: 8, won: 2, lost: 6, draw: 0, points: 4 },
-                { rank: 5, name: 'Civil Dribblers', played: 8, won: 1, lost: 7, draw: 0, points: 2 }
-            ],
-            'Volleyball': [
-                { rank: 1, name: 'CSE Spikers', played: 10, won: 8, lost: 2, draw: 0, points: 16 },
-                { rank: 2, name: 'ECE Nets', played: 10, won: 7, lost: 3, draw: 0, points: 14 },
-                { rank: 3, name: 'Mech Volley', played: 10, won: 6, lost: 4, draw: 0, points: 12 },
-                { rank: 4, name: 'Civil Smashers', played: 10, won: 5, lost: 5, draw: 0, points: 10 },
-                { rank: 5, name: 'EE Blockers', played: 10, won: 4, lost: 6, draw: 0, points: 8 }
-            ],
-            'Kabaddi': [
-                { rank: 1, name: 'CSE Raiders', played: 8, won: 7, lost: 1, draw: 0, points: 14 },
-                { rank: 2, name: 'ECE Defenders', played: 8, won: 6, lost: 2, draw: 0, points: 12 },
-                { rank: 3, name: 'Mech Strikers', played: 8, won: 5, lost: 3, draw: 0, points: 10 },
-                { rank: 4, name: 'Civil Champions', played: 8, won: 4, lost: 4, draw: 0, points: 8 },
-                { rank: 5, name: 'EE Warriors', played: 8, won: 3, lost: 5, draw: 0, points: 6 }
-            ],
-            '100m Sprint': [
-                { rank: 1, name: 'Rahul Sharma (CSE)', played: 3, won: 3, lost: 0, draw: 0, points: '10.45s' },
-                { rank: 2, name: 'Amit Kumar (ECE)', played: 3, won: 2, lost: 1, draw: 0, points: '10.67s' },
-                { rank: 3, name: 'Vikash Singh (ME)', played: 3, won: 1, lost: 2, draw: 0, points: '10.89s' },
-                { rank: 4, name: 'Rohan Verma (CE)', played: 3, won: 0, lost: 3, draw: 0, points: '11.12s' },
-                { rank: 5, name: 'Deepak Yadav (EE)', played: 3, won: 0, lost: 3, draw: 0, points: '11.34s' }
-            ],
-            'Badminton': [
-                { rank: 1, name: 'Priya Sharma (BBA)', played: 8, won: 7, lost: 1, draw: 0, points: 14 },
-                { rank: 2, name: 'Ankit Raj (CSE)', played: 8, won: 6, lost: 2, draw: 0, points: 12 },
-                { rank: 3, name: 'Sanjay Kumar (ECE)', played: 8, won: 5, lost: 3, draw: 0, points: 10 },
-                { rank: 4, name: 'Neha Singh (MBA)', played: 8, won: 4, lost: 4, draw: 0, points: 8 },
-                { rank: 5, name: 'Rajat Gupta (ME)', played: 8, won: 3, lost: 5, draw: 0, points: 6 }
-            ],
-            'Table Tennis': [
-                { rank: 1, name: 'Rohit Mehta (CSE)', played: 10, won: 9, lost: 1, draw: 0, points: 18 },
-                { rank: 2, name: 'Sneha Patel (ECE)', played: 10, won: 8, lost: 2, draw: 0, points: 16 },
-                { rank: 3, name: 'Karan Singh (ME)', played: 10, won: 7, lost: 3, draw: 0, points: 14 },
-                { rank: 4, name: 'Anjali Mishra (BBA)', played: 10, won: 6, lost: 4, draw: 0, points: 12 },
-                { rank: 5, name: 'Vikas Rao (CE)', played: 10, won: 5, lost: 5, draw: 0, points: 10 }
-            ],
-            'Chess': [
-                { rank: 1, name: 'Ankit Raj (CSE)', played: 8, won: 7, lost: 1, draw: 0, points: 14 },
-                { rank: 2, name: 'Priya Sharma (BBA)', played: 8, won: 6, lost: 2, draw: 0, points: 12 },
-                { rank: 3, name: 'Sanjay Kumar (ECE)', played: 8, won: 5, lost: 3, draw: 0, points: 10 },
-                { rank: 4, name: 'Neha Singh (MBA)', played: 8, won: 4, lost: 4, draw: 0, points: 8 },
-                { rank: 5, name: 'Rajat Gupta (ME)', played: 8, won: 3, lost: 5, draw: 0, points: 6 }
-            ]
+            'msl': {
+                'Football': [
+                    { rank: 1, name: 'CSE Warriors', played: 12, won: 9, lost: 1, draw: 2, points: 29 },
+                    { rank: 2, name: 'ECE Tigers', played: 12, won: 8, lost: 2, draw: 2, points: 26 },
+                    { rank: 3, name: 'Mech United', played: 12, won: 7, lost: 3, draw: 2, points: 23 }
+                ],
+                'Volleyball': [
+                    { rank: 1, name: 'CSE Spikers', played: 10, won: 8, lost: 2, draw: 0, points: 16 },
+                    { rank: 2, name: 'ECE Nets', played: 10, won: 7, lost: 3, draw: 0, points: 14 },
+                    { rank: 3, name: 'Mech Volley', played: 10, won: 6, lost: 4, draw: 0, points: 12 }
+                ],
+                'Basketball': [
+                    { rank: 1, name: 'CSE Hoops', played: 8, won: 7, lost: 1, draw: 0, points: 14 },
+                    { rank: 2, name: 'ECE Dunkers', played: 8, won: 6, lost: 2, draw: 0, points: 12 },
+                    { rank: 3, name: 'Mech Shooters', played: 8, won: 4, lost: 4, draw: 0, points: 8 }
+                ]
+            },
+            'mpl': {
+                'Cricket': [
+                    { rank: 1, name: 'MBA Titans', played: 10, won: 8, lost: 2, draw: 0, points: 16 },
+                    { rank: 2, name: 'CSE Kings', played: 10, won: 7, lost: 3, draw: 0, points: 14 },
+                    { rank: 3, name: 'ECE Challengers', played: 10, won: 6, lost: 4, draw: 0, points: 12 }
+                ]
+            },
+            'mfl': {
+                'Football': [
+                    { rank: 1, name: 'MUIT United', played: 14, won: 11, lost: 1, draw: 2, points: 35 },
+                    { rank: 2, name: 'Noida FC', played: 14, won: 10, lost: 2, draw: 2, points: 32 },
+                    { rank: 3, name: 'Delhi Warriors', played: 14, won: 9, lost: 3, draw: 2, points: 29 }
+                ]
+            }
         };
 
-        function updateResults(sport) {
-            const data = resultsData[sport] || resultsData['Football'];
+        function updateResults(league) {
             const tbody = document.getElementById('results-tbody');
             tbody.innerHTML = '';
+            
+            // Get the first sport for the selected league
+            const sport = leagueSports[league][0];
+            const data = resultsData[league][sport] || [];
             
             data.forEach(row => {
                 let badgeClass = '';
@@ -2077,20 +2165,71 @@
             });
         }
 
-        function showResults(sport) {
-            showSection('results');
-            document.getElementById('results-sport').value = sport;
-            updateResults(sport);
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.querySelector('[data-section="results"]').classList.add('active');
+        // Album data
+        const albumData = [
+            { id: 1, title: 'Football Finals 2024', date: '15 March 2024', league: 'msl', sport: 'football', image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { id: 2, title: 'Cricket Championship', date: '22 February 2024', league: 'mpl', sport: 'cricket', image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { id: 3, title: 'Volleyball Tournament', date: '10 January 2024', league: 'msl', sport: 'volleyball', image: 'https://images.unsplash.com/photo-1592656094267-764a45160876?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { id: 4, title: 'Basketball Finals', date: '5 December 2023', league: 'msl', sport: 'basketball', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { id: 5, title: 'Track & Field Events', date: '18 November 2023', league: 'msl', sport: 'track', image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { id: 6, title: 'Inter-College Football', date: '8 October 2023', league: 'mfl', sport: 'football', image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+        ];
+
+        // Populate album grid
+        function populateAlbum(filter = 'all') {
+            const albumGrid = document.getElementById('album-grid');
+            albumGrid.innerHTML = '';
+            
+            const filteredData = filter === 'all' 
+                ? albumData 
+                : albumData.filter(item => item.league === filter || item.sport === filter);
+            
+            filteredData.forEach(item => {
+                const albumItem = document.createElement('div');
+                albumItem.className = 'album-item';
+                albumItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="album-image">
+                    <div class="album-overlay">
+                        <div class="album-title">${item.title}</div>
+                        <div class="album-date">${item.date}</div>
+                    </div>
+                `;
+                albumGrid.appendChild(albumItem);
+            });
         }
 
-        // Close modal on outside click
-        document.getElementById('registration-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Album filters
+        document.querySelectorAll('.album-filter').forEach(filter => {
+            filter.addEventListener('click', function() {
+                document.querySelectorAll('.album-filter').forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                populateAlbum(this.dataset.filter);
+            });
         });
+
+        // Registration Modal
+        function openRegistrationModal(sportName, league) {
+            showSection('register');
+            
+            // Set the league option
+            document.querySelectorAll('.league-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.dataset.league === league.toLowerCase()) {
+                    opt.classList.add('active');
+                }
+            });
+            
+            // Update sports dropdown
+            updateSportsDropdown(league.toLowerCase());
+            
+            // Set the sport
+            document.getElementById('sport').value = sportName;
+        }
+
+        // Show results
+        function showResults(sport) {
+            showSection('results');
+        }
 
         // Scroll to top button functionality
         const scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -2125,20 +2264,6 @@
             }
         });
 
-        // Smooth scroll for all internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
         // Add animation on scroll for cards
         const observerOptions = {
             threshold: 0.1,
@@ -2164,39 +2289,20 @@
 
         // Observe cards when they come into view
         window.addEventListener('load', function() {
-            document.querySelectorAll('.info-card, .sport-card').forEach(card => {
+            document.querySelectorAll('.info-card, .sport-card, .league-card, .album-item').forEach(card => {
                 observer.observe(card);
             });
-        });
-
-        // Add keyboard navigation support
-        document.addEventListener('keydown', function(e) {
-            // Close modal on Escape key
-            if (e.key === 'Escape') {
-                const modal = document.getElementById('registration-modal');
-                if (modal.classList.contains('active')) {
-                    closeModal();
-                }
-                
-                // Also close mobile menu on Escape
-                const nav = document.getElementById('main-nav');
-                if (window.innerWidth <= 900 && nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    document.querySelector('.mobile-menu-close').style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            }
-        });
-
-        // Initialize results table
-        document.addEventListener('DOMContentLoaded', function() {
-            updateResults('Football');
+            
+            // Initialize sports dropdown
+            updateSportsDropdown('msl');
+            updateResults('msl');
+            populateAlbum();
         });
 
         // Console log for debugging
-        console.log('%c🏆 MUIT Sportys Management System', 'color: #667eea; font-size: 20px; font-weight: bold;');
-        console.log('%cVersion 2.0 - Enhanced & Responsive', 'color: #764ba2; font-size: 14px;');
-        console.log('%cAll systems operational ✓', 'color: #27ae60; font-size: 12px;');
+        console.log('%c🏆 MUIT Sportys Management System', 'color: #8B0000; font-size: 20px; font-weight: bold;');
+        console.log('%cVersion 4.0 - Enhanced UI with Album Section', 'color: #FFD700; font-size: 14px;');
+        console.log('%cAll systems operational ✓', 'color: #228B22; font-size: 12px;');
     </script>
 </body>
 </html>
